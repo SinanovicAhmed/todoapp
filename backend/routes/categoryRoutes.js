@@ -1,0 +1,18 @@
+const express = require("express");
+const router = require("express").Router();
+
+router.get("/", (req, res) => {
+  res.json({ msg: "Get categories" });
+});
+
+router.post("/", (req, res) => {
+  res.json({ msg: `Post category: ${req.body.category}` });
+});
+router.put("/:id", (req, res) => {
+  res.json({ msg: `Put category ${req.params.id}` });
+});
+router.delete("/:id", (req, res) => {
+  res.json({ msg: `Delete category ${req.params.id}` });
+});
+
+module.exports = router;
