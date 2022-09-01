@@ -7,8 +7,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useState } from "react";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userID, setUserID] = useState("");
+  const [user, setUser] = useState("");
+  console.log(user, userID, isLoggedIn);
 
-  console.log(isLoggedIn);
   return (
     <div>
       <Routes>
@@ -16,13 +18,24 @@ const App = () => {
           path="/"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Home />
+              <Home
+                user={user}
+                userID={userID}
+                setIsLoggedIn={setIsLoggedIn}
+                setUserID={setUserID}
+              />
             </PrivateRoute>
           }
         />
         <Route
           path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          element={
+            <Login
+              setIsLoggedIn={setIsLoggedIn}
+              setUserID={setUserID}
+              setUser={setUser}
+            />
+          }
         />
         <Route path="/register" element={<Register />} />
       </Routes>
