@@ -9,6 +9,13 @@ interface Props {
   addedCategory: boolean;
   categoryID: string;
   updateView: () => void;
+  tasks: {
+    _id: string;
+    userID: string;
+    categoryID: string;
+    taskHeadline: string;
+    taskText: string;
+  }[];
 }
 
 const Category = ({
@@ -16,6 +23,7 @@ const Category = ({
   addedCategory,
   categoryID,
   updateView,
+  tasks,
 }: Props) => {
   const [inputModal, toggleInputModal] = useState(false);
   const [updatedName, setUpdatedName] = useState(categoryName);
@@ -41,7 +49,7 @@ const Category = ({
     });
   };
   return (
-    <div className="w-[300px] min-h-[100px] bg-[#E8E8E8] rounded-md mx-[20px] my-[80px] pb-[15px]">
+    <div className="w-[300px] min-h-[100px] bg-[#D3D3D3] rounded-md mx-[20px] my-[80px] pb-[15px]">
       <div className="flex justify-between items-center">
         <div className="flex items-center pl-[10px] pt-[5px] pb-[15px]">
           {inputModal ? (
@@ -61,7 +69,7 @@ const Category = ({
               </div>
             </div>
           ) : (
-            <h2 className="font-bold">{categoryName}</h2>
+            <h2 className="font-bold transition-all">{categoryName}</h2>
           )}
 
           <h2 className="rounded-full bg-[#BEBEBE] w-[25px] h-[25px] text-center ml-[5px]">
@@ -88,8 +96,11 @@ const Category = ({
         )}
       </div>
       <div className="flex flex-col justify-center items-center">
-        <Task />
-        <Task />
+        {tasks.map((task, i) => {
+          if (task.categoryID === categoryID) {
+            return <Task key={i} task={task} />;
+          }
+        })}
       </div>
     </div>
   );
