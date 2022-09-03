@@ -10,6 +10,7 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
   const [taskHeader, setTaskHeader] = useState("");
   const [taskText, setText] = useState("");
   const disableButton = categoriesCount > 3;
+
   const addCategory = async () => {
     const response = await fetch("http://localhost:5000/api/categories", {
       method: "POST",
@@ -35,7 +36,11 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((res) => updateView());
+    }).then((res) => {
+      setTaskHeader("");
+      setText("");
+      updateView();
+    });
   };
   return (
     <div className="w-[100%] flex flex-col md:flex-row mt-[20px] justify-around items-center">
@@ -45,6 +50,7 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
       >
         <input
           onChange={(e) => setText(e.target.value)}
+          value={taskText}
           className="bg-[#D3D3D3] p-[8px] mr-[5px] rounded my-[3px]"
           type="string"
           required
@@ -52,6 +58,7 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
         />
         <input
           onChange={(e) => setTaskHeader(e.target.value)}
+          value={taskHeader}
           className="bg-[#D3D3D3] p-[8px] mr-[5px] rounded my-[3px]"
           type="string"
           required
@@ -65,7 +72,7 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
         disabled={disableButton}
         onClick={addCategory}
         className={`px-[20px] py-[5px] bg-[#2596be] rounded text-white text-bold transition-all my-[5px]${
-          disableButton ? "bg-[#A0A0A0]" : ""
+          disableButton ? " bg-[#A0A0A0]" : ""
         }`}
       >
         + New category

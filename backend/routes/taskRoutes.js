@@ -30,8 +30,22 @@ router.post("/", async (req, res) => {
     res.json({ error: error.message });
   }
 });
-router.put("/:id", (req, res) => {
-  res.json({ msg: `Put task ${req.params.id}` });
+router.put("/:id", async (req, res) => {
+  const taskID = req.params.id;
+  const categoryID = req.body.categoryID;
+  try {
+    await Task.findOneAndUpdate(
+      {
+        _id: taskID,
+      },
+      {
+        categoryID: categoryID,
+      }
+    );
+    res.json({ msg: "Update succesfull" });
+  } catch (e) {
+    res.json({ msg: e.message });
+  }
 });
 router.delete("/:id", async (req, res) => {
   const taskID = req.params.id;

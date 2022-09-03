@@ -27,6 +27,12 @@ const Category = ({
 }: Props) => {
   const [inputModal, toggleInputModal] = useState(false);
   const [updatedName, setUpdatedName] = useState(categoryName);
+
+  //filtriranje taskova koje pripadaju kategorijama
+  const tasksCount = tasks.filter(
+    (task) => task.categoryID === categoryID
+  ).length;
+
   const deleteCategory = async () => {
     const response = await fetch(
       `http://localhost:5000/api/categories/${categoryID}`,
@@ -48,10 +54,21 @@ const Category = ({
       toggleInputModal(false);
     });
   };
+  const dragOverFunction = async (e: React.DragEvent<HTMLDivElement>) => {
+    const taskID = e.dataTransfer.getData("task");
+
+    const response = await fetch(`http://localhost:5000/api/task/${taskID}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ categoryID: categoryID }),
+    }).then((res) => {
+      updateView();
+    });
+  };
   return (
-    <div className="w-[300px] min-h-[100px] bg-[#D3D3D3] rounded-md mx-[20px] my-[80px] pb-[15px]">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center pl-[10px] pt-[5px] pb-[15px]">
+    <div className="w-[300px] min-h-[100px] bg-[#D3D3D3] rounded-md mx-[20px] my-[80px] ">
+      <div className="flex justify-between items-center border-b-2 pb-[5px]">
+        <div className="flex items-center pl-[10px] pt-[5px] ">
           {inputModal ? (
             <div className="flex">
               <input
@@ -73,7 +90,7 @@ const Category = ({
           )}
 
           <h2 className="rounded-full bg-[#BEBEBE] w-[25px] h-[25px] text-center ml-[5px]">
-            5
+            {tasksCount}
           </h2>
         </div>
         {addedCategory ? (
@@ -95,7 +112,13 @@ const Category = ({
           ""
         )}
       </div>
-      <div className="flex flex-col justify-center items-center">
+      <div
+        onDrop={dragOverFunction}
+        onDragOver={(e) => {
+          e.preventDefault();
+        }}
+        className="flex flex-col justify-center items-center min-h-[70px]"
+      >
         {tasks.map((task, i) => {
           if (task.categoryID === categoryID) {
             return <Task key={i} task={task} />;
