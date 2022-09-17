@@ -94,7 +94,7 @@ const Category = ({
           </h2>
         </div>
         {addedCategory ? (
-          <div className="flex pb-[8px]">
+          <div className="flex h-[100%] items-center">
             <div
               onClick={() => toggleInputModal(!inputModal)}
               className="hover:cursor-pointer"
@@ -121,7 +121,7 @@ const Category = ({
       >
         {tasks.map((task, i) => {
           if (task.categoryID === categoryID) {
-            return <Task key={i} task={task} />;
+            return <Task key={i} task={task} updateView={updateView} />;
           }
         })}
       </div>
