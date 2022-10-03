@@ -47,6 +47,29 @@ router.put("/:id", async (req, res) => {
     res.json({ msg: e.message });
   }
 });
+router.put("/contentUpdate/:id", async (req, res) => {
+  const taskID = req.params.id;
+  const header = req.body.taskHeadline;
+  const text = req.body.taskText;
+  if (!header || !text) {
+    res.json({ msg: "Invalid params" });
+  } else {
+    try {
+      await Task.findOneAndUpdate(
+        {
+          _id: taskID,
+        },
+        {
+          taskHeadline: header,
+          taskText: text,
+        }
+      );
+      res.json({ msg: "Update succesfull" });
+    } catch (e) {
+      res.json({ msg: e.message });
+    }
+  }
+});
 router.delete("/:id", async (req, res) => {
   const taskID = req.params.id;
   try {

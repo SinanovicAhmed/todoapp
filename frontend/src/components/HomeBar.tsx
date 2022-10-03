@@ -43,19 +43,11 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
     });
   };
   return (
-    <div className="w-[100%] flex flex-col md:flex-row mt-[20px] justify-around items-center">
+    <div className="w-[100%] p-[5px] flex flex-col md:flex-row mt-[20px] justify-around items-center border-2">
       <form
         onSubmit={addTask}
         className="flex flex-col items-center md:flex-row"
       >
-        <input
-          onChange={(e) => setText(e.target.value)}
-          value={taskText}
-          className="bg-[#D3D3D3] p-[8px] mr-[5px] rounded my-[3px]"
-          type="string"
-          required
-          placeholder="Enter task content"
-        />
         <input
           onChange={(e) => setTaskHeader(e.target.value)}
           value={taskHeader}
@@ -63,6 +55,14 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
           type="string"
           required
           placeholder="Enter task headline"
+        />
+        <input
+          onChange={(e) => setText(e.target.value)}
+          value={taskText}
+          className="bg-[#D3D3D3] p-[8px] mr-[5px] rounded my-[3px]"
+          type="string"
+          required
+          placeholder="Enter task content"
         />
         <button className="px-[20px] py-[5px] bg-[#2596be] rounded text-white text-bold my-[5px]">
           Add task
