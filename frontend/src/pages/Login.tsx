@@ -46,7 +46,10 @@ const Login = ({ setIsLoggedIn, setUserID, setUser }: Props) => {
   return (
     <div className="h-screen w-screen flex">
       <LoginSidebar paragraph={paragraph} button={true} />
-      <div className="w-[100%] lg:w-[70%] flex flex-col items-center justify-center">
+      <div
+        className="w-[100%] lg:w-[70%] flex flex-col items-center justify-center"
+        data-aos="fade"
+      >
         <h1 className="pb-[30px] text-[30px] text-[#2596be] font-bold">
           Login
         </h1>

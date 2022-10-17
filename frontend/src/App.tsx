@@ -5,11 +5,15 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import { useState } from "react";
+import "aos/dist/aos.css";
+import AOS from "aos";
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userID, setUserID] = useState("");
   const [user, setUser] = useState("");
-  console.log(user, userID, isLoggedIn);
+
+  AOS.init();
 
   return (
     <div>

@@ -43,7 +43,10 @@ const HomeBar = ({ userID, updateView, categoriesCount }: Props) => {
     });
   };
   return (
-    <div className="w-[100%] p-[5px] flex flex-col md:flex-row mt-[20px] justify-around items-center border-2">
+    <div
+      data-aos="fade"
+      className="w-[100%] p-[5px] flex flex-col md:flex-row mt-[20px] justify-around items-center border-2"
+    >
       <form
         onSubmit={addTask}
         className="flex flex-col items-center md:flex-row"

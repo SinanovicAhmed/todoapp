@@ -6,7 +6,10 @@ interface Props {
 }
 const LoginSidebar = ({ paragraph, button }: Props) => {
   return (
-    <div className="hidden lg:flex w-[30%] h-[100%] bg-[#2596be] flex-col justify-center">
+    <div
+      className="hidden lg:flex w-[30%] h-[100%] bg-[#2596be] flex-col justify-center"
+      data-aos="fade-right"
+    >
       <div className="w-[80%] h-[80%] m-auto flex flex-col justify-around items-start">
         <div className="flex">
           {taskIcon}

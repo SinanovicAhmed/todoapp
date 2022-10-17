@@ -66,7 +66,10 @@ const Category = ({
     });
   };
   return (
-    <div className="w-[300px] min-h-[100px] bg-[#D3D3D3] rounded-md mx-[20px] my-[80px] ">
+    <div
+      className="w-[300px] min-h-[100px] bg-[#D3D3D3] rounded-md mx-[20px] my-[80px]"
+      data-aos="fade-up"
+    >
       <div className="flex justify-between items-center border-b-2 pb-[5px]">
         <div className="flex items-center pl-[10px] pt-[5px] ">
           {inputModal ? (

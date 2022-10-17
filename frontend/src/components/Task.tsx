@@ -55,6 +55,7 @@ const Task = (props: Props) => {
       className="w-[95%] min-h-[80px] rounded-md bg-white px-[5px] my-[4px] cursor-pointer"
       onMouseEnter={() => setOptionsShow(true)}
       onMouseLeave={() => setOptionsShow(false)}
+      data-aos="fade"
     >
       <div className="flex justify-between border-b-2 border-[#2596be70] select-none">
         {editing ? (
@@ -80,10 +81,11 @@ const Task = (props: Props) => {
               onClick={() => {
                 setEditing(!editing);
               }}
+              className="grayscale"
             >
               {updateIcon}
             </div>
-            <div onClick={deleteTask} className="grayscale">
+            <div onClick={deleteTask} className="grayscale pl-[5px]">
               {deleteIcon}
             </div>
           </div>
